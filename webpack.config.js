@@ -28,7 +28,11 @@ const config = {
             name: 'desktop',
             filename: 'remoteEntry.js',
             remotes: {
-                wheel: `wheel@http://localhost:8080/remoteEntry.js`,
+                wheel: `wheel@${
+                    isProduction
+                        ? 'https://ilnazv.github.io/wheel'
+                        : 'http://localhost:8080'
+                }/remoteEntry.js`,
             },
             shared: {
                 ...deps,
