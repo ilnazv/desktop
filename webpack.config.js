@@ -2,6 +2,7 @@
 
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { SourceMapDevToolPlugin } = require('webpack');
 const { ModuleFederationPlugin } = require('webpack').container;
 const deps = require('./package.json').dependencies;
@@ -25,6 +26,18 @@ const config = {
     plugins: [
         new HtmlWebpackPlugin({
             template: './public/index.html',
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: 'public',
+                    globOptions: {
+                        dot: true,
+                        gitignore: true,
+                        ignore: ['**/index.html'],
+                    },
+                },
+            ],
         }),
         new ModuleFederationPlugin({
             name: 'desktop',
