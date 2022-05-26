@@ -1,8 +1,13 @@
 import React from 'react';
 
-export function PanelIcon(): JSX.Element {
+export function PanelIcon({
+    ...props
+}: React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+>): JSX.Element {
     return (
-        <div
+        <button
             style={{
                 width: '40px',
                 height: '40px',
@@ -10,6 +15,7 @@ export function PanelIcon(): JSX.Element {
                 lineHeight: '40px',
             }}
             className="pointer"
+            {...props}
         >
             <span
                 className="material-icons primary"
@@ -20,6 +26,6 @@ export function PanelIcon(): JSX.Element {
             >
                 pie_chart
             </span>
-        </div>
+        </button>
     );
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { AppContainer } from './AppContainer';
 import { Background } from './Background';
 import { BottomPanel } from './BottomPanel';
 import { PanelIcon } from './PanelIcon';
@@ -11,16 +12,15 @@ function App() {
         <>
             <Background>
                 App:
-                <button onClick={() => setShow((cur) => !cur)}>
-                    Toggle (loads app)
-                </button>
                 {show && (
-                    <React.Suspense fallback={<>Loading . . .</>}>
-                        <WheelApp />
-                    </React.Suspense>
+                    <AppContainer>
+                        <React.Suspense fallback={<>Loading . . .</>}>
+                            <WheelApp />
+                        </React.Suspense>
+                    </AppContainer>
                 )}
                 <BottomPanel>
-                    <PanelIcon />
+                    <PanelIcon onClick={() => setShow((cur) => !cur)} />
                 </BottomPanel>
             </Background>
         </>
