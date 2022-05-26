@@ -10,6 +10,8 @@ const isProduction = process.env.NODE_ENV == 'production';
 
 const stylesHandler = 'style-loader';
 
+const useHostedRemoteApp = true;
+
 const config = {
     entry: './src/index.ts',
     output: {
@@ -29,7 +31,7 @@ const config = {
             filename: 'remoteEntry.js',
             remotes: {
                 wheel: `wheel@${
-                    isProduction
+                    useHostedRemoteApp
                         ? 'https://ilnazv.github.io/wheel'
                         : 'http://localhost:8080'
                 }/remoteEntry.js`,
