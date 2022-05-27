@@ -5,8 +5,10 @@ export function Background({ children }: PropsWithChildren<{}>): JSX.Element {
     return (
         <div
             style={{
-                backgroundImage:
-                    'linear-gradient(0deg, #edabc5 0%, #032e52 100%)',
+                backgroundImage: 'url(https://i.redd.it/ozu901un81191.jpg)',
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center center',
                 height: `100vh`,
                 width: `100wh`,
             }}
