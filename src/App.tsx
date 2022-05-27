@@ -11,16 +11,15 @@ function App() {
     return (
         <>
             <Background>
-                App:
                 {show && (
-                    <AppContainer>
+                    <AppContainer onClose={() => setShow(false)}>
                         <React.Suspense fallback={<>Loading . . .</>}>
                             <WheelApp />
                         </React.Suspense>
                     </AppContainer>
                 )}
                 <BottomPanel>
-                    <PanelIcon onClick={() => setShow((cur) => !cur)} />
+                    <PanelIcon onClick={() => setShow(true)} />
                 </BottomPanel>
             </Background>
         </>
