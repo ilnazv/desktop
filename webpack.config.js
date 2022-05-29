@@ -11,7 +11,7 @@ const isProduction = process.env.NODE_ENV == 'production';
 
 const stylesHandler = 'style-loader';
 
-const useHostedRemoteApp = true;
+const useHostedRemoteApp = isProduction || false;
 
 const config = {
     entry: './src/index.ts',
@@ -21,7 +21,7 @@ const config = {
     devServer: {
         open: true,
         host: 'localhost',
-        port: 8090,
+        port: 8080,
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -46,7 +46,12 @@ const config = {
                 wheel: `wheel@${
                     useHostedRemoteApp
                         ? 'https://ilnazv.github.io/wheel'
-                        : 'http://localhost:8080'
+                        : 'http://localhost:8081'
+                }/remoteEntry.js`,
+                towerdefense: `towerdefense@${
+                    useHostedRemoteApp
+                        ? 'https://ilnazv.github.io/towerdefensejs'
+                        : 'http://localhost:8082'
                 }/remoteEntry.js`,
             },
             shared: {
