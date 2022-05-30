@@ -9,3 +9,9 @@ declare module 'towerdefense/App' {
 
     export default TowerDefenseApp;
 }
+
+declare module 'ngsandbox/ngsandbox' {
+    const mount: () => void;
+
+    export { mount };
+}

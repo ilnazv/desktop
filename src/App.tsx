@@ -14,6 +14,10 @@ function App() {
             const TowerDefenseApp = import('towerdefense/App');
             TowerDefenseApp.then((module) => module.default(tdRef.current!));
         }
+        if (app === 'ngsandbox') {
+            const ngsandboxModule = import('ngsandbox/ngsandbox');
+            ngsandboxModule.then((module) => module.mount());
+        }
     }, [app]);
 
     return (
@@ -31,9 +35,16 @@ function App() {
                         <div ref={tdRef} style={{ position: 'relative' }}></div>
                     </AppContainer>
                 )}
+                {app === 'ngsandbox' && (
+                    <AppContainer onClose={() => setApp('')}>
+                        {/* @ts-ignore */}
+                        <app-root></app-root>
+                    </AppContainer>
+                )}
                 <BottomPanel>
                     <PanelIcon onClick={() => setApp('wheel')} />
                     <PanelIcon onClick={() => setApp('towerdefense')} />
+                    <PanelIcon onClick={() => setApp('ngsandbox')} />
                 </BottomPanel>
             </Background>
         </>

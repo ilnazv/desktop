@@ -53,6 +53,11 @@ const config = {
                         ? 'https://ilnazv.github.io/towerdefensejs'
                         : 'http://localhost:8082'
                 }/remoteEntry.js`,
+                ngsandbox: `ngsandbox@${
+                    useHostedRemoteApp
+                        ? 'https://ilnazv.github.io/ng-sandbox'
+                        : 'http://localhost:8083'
+                }/remoteEntry.js`,
             },
             shared: {
                 ...deps,
