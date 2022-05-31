@@ -1,4 +1,10 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, {
+    useCallback,
+    useEffect,
+    useLayoutEffect,
+    useRef,
+    useState,
+} from 'react';
 import { AppContainer } from './AppContainer';
 import { Background } from './Background';
 import { BottomPanel } from './BottomPanel';
@@ -8,37 +14,47 @@ const WheelApp = React.lazy(() => import('wheel/App'));
 function App() {
     const [app, setApp] = useState('');
     const tdRef = useRef<HTMLDivElement>(null);
+    const ngsandboxRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (app === 'towerdefense' && tdRef.current?.innerHTML?.length === 0) {
             const TowerDefenseApp = import('towerdefense/App');
             TowerDefenseApp.then((module) => module.default(tdRef.current!));
         }
-        if (app === 'ngsandbox') {
+        if (
+            app === 'ngsandbox' &&
+            ngsandboxRef.current?.innerHTML?.length === 0
+        ) {
             const ngsandboxModule = import('ngsandbox/ngsandbox');
-            ngsandboxModule.then((module) => module.mount());
+            ngsandboxModule.then((module) =>
+                module.mount(ngsandboxRef.current!)
+            );
         }
     }, [app]);
+
+    const onClose = useCallback(() => setApp(''), []);
 
     return (
         <>
             <Background>
                 {app === 'wheel' && (
-                    <AppContainer onClose={() => setApp('')}>
+                    <AppContainer onClose={onClose}>
                         <React.Suspense fallback={<>Loading . . .</>}>
                             <WheelApp />
                         </React.Suspense>
                     </AppContainer>
                 )}
                 {app === 'towerdefense' && (
-                    <AppContainer onClose={() => setApp('')}>
+                    <AppContainer onClose={onClose}>
                         <div ref={tdRef} style={{ position: 'relative' }}></div>
                     </AppContainer>
                 )}
                 {app === 'ngsandbox' && (
-                    <AppContainer onClose={() => setApp('')}>
-                        {/* @ts-ignore */}
-                        <app-root></app-root>
+                    <AppContainer onClose={onClose}>
+                        <div
+                            ref={ngsandboxRef}
+                            style={{ position: 'relative' }}
+                        ></div>
                     </AppContainer>
                 )}
                 <BottomPanel>

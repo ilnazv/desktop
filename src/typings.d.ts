@@ -11,7 +11,7 @@ declare module 'towerdefense/App' {
 }
 
 declare module 'ngsandbox/ngsandbox' {
-    const mount: () => void;
+    const mount: (el: HTMLElement) => void;
 
     export { mount };
 }
